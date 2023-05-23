@@ -30,7 +30,7 @@ public class ActionServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init(); //To change body of generated methods, choose Tools | Templates.
         JpaUtil.creerFabriquePersistance();
-        new ServiceAdmin().initialiser();
+        //new ServiceAdmin().initialiser();
     }
 
     @Override

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Demande de soutien</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            .logout-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            }
+            
+            .subjects-list {
+                list-style-type: none;
+                padding: 0;
+                display: flex;
+            }
+
+              .subjects-list li {
+                margin-right: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <button class="logout-button">Déconnexion</button>
+        <h1>Demande de cours</h1>
+        <h2>Nouvelle demande</h2>
+
+        <label for="matiere">Matière concernée:</label>
+        <ul class="subjects-list">
+            <li><input type="radio" id="svt" name="matiere" value="svt"><label for="svt">SVT</label></li>
+            <li><input type="radio" id="maths" name="matiere" value="maths"><label for="maths">Maths</label></li>
+            <li><input type="radio" id="histoire-geo" name="matiere" value="histoire-geo"><label for="histoire-geo">Histoire-géo</label></li>
+            <li><input type="radio" id="francais" name="matiere" value="francais"><label for="francais">Français</label></li>
+            <li><input type="radio" id="physique-chimie" name="matiere" value="physique-chimie"><label for="physique-chimie">Physique chimie</label></li>
+            <li><input type="radio" id="anglais" name="matiere" value="anglais"><label for="anglais">Anglais</label></li>
+            <li><input type="radio" id="technologie" name="matiere" value="technologie"><label for="technologie">Technologie</label></li>
+            <li><input type="radio" id="espagnol" name="matiere" value="espagnol"><label for="espagnol">Espagnol</label></li>
+            <li><input type="radio" id="musique" name="matiere" value="musique"><label for="musique">Musique</label></li>
+        </ul>
+
+        <br><br>
+
+        <label for="description">Description de la demande:</label>
+        <br>
+        <textarea id="description" name="description" rows="4" cols="50"></textarea>
+
+        <br><br>
+
+        <button id="valider" name="valider">Valider la demande</button>
+    </body>
+</html>
