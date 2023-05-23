@@ -28,7 +28,7 @@ h1 {
     right: 16px;
 }
 
-.top-right button {
+button {
     padding: 10px 20px;
     margin-left: 10px;
     background-color: #4CAF50; /* green */
@@ -39,7 +39,7 @@ h1 {
     transition-duration: 0.4s;
 }
 
-.top-right button:hover {
+button:hover {
     background-color: #45a049; /* dark green */
 }
 .image-container {

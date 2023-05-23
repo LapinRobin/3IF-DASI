@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 H:\Documents\Instructif\TP2\src\main\java\action\TestUtilisateur.java
 H:\Documents\Instructif\TP2\src\main\java\action\Action.java
 H:\Documents\Instructif\TP2\src\main\java\action\AuthentifierIntervenantAction.java
@@ -10,3 +11,13 @@ H:\Documents\Instructif\TP2\src\main\java\controleur\ActionServlet.java
 H:\Documents\Instructif\TP2\src\main\java\vue\HistoriqueEleveSerialisation.java
 H:\Documents\Instructif\TP2\src\main\java\vue\Serialisation.java
 H:\Documents\Instructif\TP2\src\main\java\action\ObtenirInterventionsEleveAction.java
+=======
+H:\Documents\DASI\Frontend\3IF-DASI\TP2\src\main\java\action\AuthentifierUtilisateurAction.java
+H:\Documents\DASI\Frontend\3IF-DASI\TP2\src\main\java\action\ObtenirInterventionsEleveAction.java
+H:\Documents\DASI\Frontend\3IF-DASI\TP2\src\main\java\controleur\ActionServlet.java
+H:\Documents\DASI\Frontend\3IF-DASI\TP2\src\main\java\vue\Serialisation.java
+H:\Documents\DASI\Frontend\3IF-DASI\TP2\src\main\java\action\TestUtilisateur.java
+H:\Documents\DASI\Frontend\3IF-DASI\TP2\src\main\java\vue\HistoriqueEleveSerialisation.java
+H:\Documents\DASI\Frontend\3IF-DASI\TP2\src\main\java\vue\ProfilUtilisateurSerialisation.java
+H:\Documents\DASI\Frontend\3IF-DASI\TP2\src\main\java\action\Action.java
+>>>>>>> 7c0f4ae4f4730040d929d02d54dec683c64d0a77
