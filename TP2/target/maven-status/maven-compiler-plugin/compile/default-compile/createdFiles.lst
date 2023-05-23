@@ -1,8 +1,8 @@
-vue\HistoriqueEleveSerialisation.class
 action\Action.class
-action\ObtenirInterventionsEleveAction.class
 controleur\ActionServlet.class
-action\TestUtilisateur.class
 vue\ProfilUtilisateurSerialisation.class
 action\AuthentifierUtilisateurAction.class
+vue\HistoriqueEleveSerialisation.class
+action\ObtenirInterventionsEleveAction.class
+action\TestUtilisateur.class
 vue\Serialisation.class

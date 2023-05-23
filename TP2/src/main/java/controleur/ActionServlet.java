@@ -6,9 +6,11 @@ package controleur;
  * and open the template in the editor.
  */
 
+import action.AuthentifierIntervenantAction;
 import vue.ProfilUtilisateurSerialisation;
 import action.AuthentifierUtilisateurAction;
 import action.ObtenirInterventionsEleveAction;
+import action.ObtenirInterventionsIntervenantAction;
 import dao.JpaUtil;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -16,8 +18,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import metier.service.ServiceAdmin;
 import vue.HistoriqueEleveSerialisation;
+import vue.HistoriqueIntervenantSerialisation;
+import vue.ProfilIntervenantSerialisation;
 
 /**
  *
@@ -30,7 +33,7 @@ public class ActionServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init(); //To change body of generated methods, choose Tools | Templates.
         JpaUtil.creerFabriquePersistance();
-        //new ServiceAdmin().initialiser();
+        // new ServiceAdmin().initialiser();
     }
 
     @Override
@@ -56,14 +59,24 @@ public class ActionServlet extends HttpServlet {
         String todo = request.getParameter("todo");
         System.out.println("Paramètre todo : " + todo);
         switch(todo) {
-            case "connecter" : {
+            case "connecter-eleve" : {
                 new AuthentifierUtilisateurAction().executer(request);
                 new ProfilUtilisateurSerialisation().serialiser(request, response);
+                break;
+            }
+            case "connecter-intervenant" : {
+                new AuthentifierIntervenantAction().executer(request);
+                new ProfilIntervenantSerialisation().serialiser(request, response);
                 break;
             }
             case "consulter-historique-eleve" : {
                 new ObtenirInterventionsEleveAction().executer(request);
                 new HistoriqueEleveSerialisation().serialiser(request, response);
+                break;
+            }
+            case "consulter-historique-intervenant" : {
+                new ObtenirInterventionsIntervenantAction().executer(request);
+                new HistoriqueIntervenantSerialisation().serialiser(request, response);
                 break;
             }
             default : {
