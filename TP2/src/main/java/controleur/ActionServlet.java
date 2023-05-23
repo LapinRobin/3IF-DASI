@@ -9,6 +9,7 @@ package controleur;
 import action.AuthentifierIntervenantAction;
 import vue.ProfilUtilisateurSerialisation;
 import action.AuthentifierUtilisateurAction;
+import action.InscrireEleveAction;
 import action.ObtenirInterventionsEleveAction;
 import action.ObtenirInterventionsIntervenantAction;
 import dao.JpaUtil;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import vue.HistoriqueEleveSerialisation;
 import vue.HistoriqueIntervenantSerialisation;
+import vue.InscrireEleveSerialisation;
 import vue.ProfilIntervenantSerialisation;
 
 /**
@@ -77,6 +79,11 @@ public class ActionServlet extends HttpServlet {
             case "consulter-historique-intervenant" : {
                 new ObtenirInterventionsIntervenantAction().executer(request);
                 new HistoriqueIntervenantSerialisation().serialiser(request, response);
+                break;
+            }
+            case "inscrire-eleve" : {
+                new InscrireEleveAction().executer(request);
+                new InscrireEleveSerialisation().serialiser(request, response);
                 break;
             }
             default : {

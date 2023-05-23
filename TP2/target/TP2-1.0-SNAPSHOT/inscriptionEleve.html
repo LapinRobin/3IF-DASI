@@ -7,12 +7,14 @@ and open the template in the editor.
 <html>
     <head>
         <title>INSTRUCT'IF</title>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
     <div class="form-container">
         <h1>INSTRUCT'IF</h1>
+        <p id="notification">Veuillez vous inscrire</p>
         <form>
             <label for="nom">Nom:</label><br>
             <input type="text" id="nom" name="nom"><br>
@@ -46,5 +48,63 @@ and open the template in the editor.
             <input type="submit" value="Je m'inscris">
         </form>
     </div>
+    <script>
+    $(document).ready( function () {
+        $('form').on( 'submit', function (e) { // Function called when form is submitted
+
+            e.preventDefault(); // Prevent form from being submitted in the default way
+            
+            console.log("clic sur le bouton d'inscription"); // LOG in JavaScript Console
+            $('#notification').html("Inscription..."); // Message for the notification paragraph
+
+            // Get the value of the form fields
+            var nom = $('#nom').val();
+            var prenom = $('#prenom').val();
+            var birthdate = $('#birthdate').val();
+            var code = $('#code').val();
+            var classe = $('#classe').val();
+            var email = $('#email').val();
+            var password = $('#password').val();
+
+            // AJAX Call
+            $.ajax({
+                url: './ActionServlet', 
+                method: 'POST',
+                data: {
+                    todo: 'inscrire-eleve', 
+                    nom: nom,
+                    prenom: prenom,
+                    birthdate: birthdate,
+                    code: code,
+                    classe: classe,
+                    email: email,
+                    password: password
+                },
+                dataType: 'json'
+            })
+            .done( function (response) { // Function called if the AJAX call is successful
+                console.log('Response',response); // LOG in JavaScript Console
+                if (response.creation) {
+                    $('#notification').html("Inscription OK");  // Message for the notification paragraph
+                    // TODO: display the information of the client in the notification
+                    var user = response.eleve;
+                    $('#notification').html("Inscription de "+user.prenom+" "+user.nom+" (ID "+user.id+")");
+                    // window.location = "compteEleve.html?idEleve="+user.id;
+                }
+                else {
+                    $('#notification').html("Erreur d'Inscription"); // Message for the notification paragraph
+                }
+            })
+            .fail( function (error) { // Function called if there is an error during the AJAX call
+                console.log('Error',error); // LOG in JavaScript Console
+                alert("Erreur lors de l'appel AJAX");
+            })
+            .always( function () { // Function always called
+                
+            });
+        });
+    });
+</script>
+
 </body>
 </html>
