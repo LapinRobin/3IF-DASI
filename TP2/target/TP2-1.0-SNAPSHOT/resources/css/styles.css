@@ -1,0 +1,49 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : May 23, 2023, 5:01:54 PM
+    Author     : ysu
+*/
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.top-right {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+}
+
+#slideshow {
+    width: 100%;
+    height: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+#slideshow img {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+    object-fit: cover; /* This line ensures the images keep their scale */
+}
+
+#slideshow img.active {
+    opacity: 1;
+}
+
+.content {
+    padding: 20px;
+    text-align: justify;
+}
+
+.inscription {
+    text-align: center;
+    padding-top: 20px;
+}

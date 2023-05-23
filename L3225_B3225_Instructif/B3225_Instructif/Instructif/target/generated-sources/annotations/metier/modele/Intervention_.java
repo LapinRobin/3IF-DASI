@@ -8,7 +8,7 @@ import metier.modele.Eleve;
 import metier.modele.Intervenant;
 import metier.modele.Matiere;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2023-05-23T15:30:36")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2023-05-23T16:07:18")
 @StaticMetamodel(Intervention.class)
 public class Intervention_ { 
 
