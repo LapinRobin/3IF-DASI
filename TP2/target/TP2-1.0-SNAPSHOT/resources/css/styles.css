@@ -8,36 +8,48 @@ and open the template in the editor.
     Author     : ysu
 */
 
+/* Normalize body margins and padding */
 body {
+    margin: 0;
+    padding: 0;
     font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+    padding: 20px 0;
 }
 
 .top-right {
     position: absolute;
-    top: 8px;
+    top: 16px;
     right: 16px;
 }
 
-#slideshow {
-    width: 100%;
-    height: auto;
-    position: relative;
-    overflow: hidden;
+.top-right button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    background-color: #4CAF50; /* green */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition-duration: 0.4s;
 }
 
-#slideshow img {
-    width: 100%;
-    height: auto;
-    position: absolute;
-    opacity: 0;
-    transition: opacity 2s ease-in-out;
-    object-fit: cover; /* This line ensures the images keep their scale */
+.top-right button:hover {
+    background-color: #45a049; /* dark green */
+}
+.image-container {
+  display: flex; /* Use flexbox for horizontal alignment */
 }
 
-#slideshow img.active {
-    opacity: 1;
+.image-container img {
+  width: 33.33%; /* Set each image to occupy one-third of the container width */
+  height: auto; /* Maintain the aspect ratio of the images */
 }
-
 .content {
     padding: 20px;
     text-align: justify;
@@ -45,5 +57,9 @@ body {
 
 .inscription {
     text-align: center;
-    padding-top: 20px;
+}
+
+img {
+  width: auto; /* Set the width to 100% of the parent container */
+  height: 100%; /* Automatically adjust the height while maintaining the aspect ratio */
 }
