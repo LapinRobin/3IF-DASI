@@ -53,6 +53,7 @@ public class HistoriqueEleveSerialisation extends Serialisation{
 
         container.add("interventions", jsonListeInterventions);
         
+        System.out.println(container);
         
         Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
         PrintWriter out = getWriter(response);

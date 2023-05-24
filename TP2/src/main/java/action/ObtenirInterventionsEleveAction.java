@@ -22,12 +22,11 @@ import javax.servlet.http.HttpSession;
 public class ObtenirInterventionsEleveAction extends Action{
     public void executer(HttpServletRequest request) {
         System.out.println("appel de ObtenirInterventionsEleveAction");
-        Long idEleveRequest = Long.valueOf((String)request.getParameter("idEleve")) ;
         HttpSession session = request.getSession(true);
         Long idEleveSession = (Long) session.getAttribute("idEleve");
         
         List<Intervention> interventions = null;
-        if(idEleveSession != null && Objects.equals(idEleveRequest, idEleveSession)){
+        if(idEleveSession != null){
             ServiceClient service = new ServiceClient();
             Eleve eleve = service.trouverEleveParId(idEleveSession);
             interventions = service.listerInterventionsPourEleve(eleve); 

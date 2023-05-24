@@ -9,6 +9,7 @@ and open the template in the editor.
         <title>Demande de soutien</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <style>
             .logout-button {
             position: absolute;
@@ -33,16 +34,8 @@ and open the template in the editor.
         <h2>Nouvelle demande</h2>
 
         <label for="matiere">Matière concernée:</label>
-        <ul class="subjects-list">
-            <li><input type="radio" id="svt" name="matiere" value="svt"><label for="svt">SVT</label></li>
-            <li><input type="radio" id="maths" name="matiere" value="maths"><label for="maths">Maths</label></li>
-            <li><input type="radio" id="histoire-geo" name="matiere" value="histoire-geo"><label for="histoire-geo">Histoire-géo</label></li>
-            <li><input type="radio" id="francais" name="matiere" value="francais"><label for="francais">Français</label></li>
-            <li><input type="radio" id="physique-chimie" name="matiere" value="physique-chimie"><label for="physique-chimie">Physique chimie</label></li>
-            <li><input type="radio" id="anglais" name="matiere" value="anglais"><label for="anglais">Anglais</label></li>
-            <li><input type="radio" id="technologie" name="matiere" value="technologie"><label for="technologie">Technologie</label></li>
-            <li><input type="radio" id="espagnol" name="matiere" value="espagnol"><label for="espagnol">Espagnol</label></li>
-            <li><input type="radio" id="musique" name="matiere" value="musique"><label for="musique">Musique</label></li>
+        <ul class="subjects-list" id="liste-matieres">
+            <li><input type="radio" id="svt" name="matiere" value="svt"><label for="svt">SVT</label></li>  
         </ul>
 
         <br><br>
@@ -54,5 +47,76 @@ and open the template in the editor.
         <br><br>
 
         <button id="valider" name="valider">Valider la demande</button>
+        <p id="notification"></p>
+        
+        <script>
+            function initDonneesPage(){
+                
+                $.ajax({
+                    url:'./ActionServlet',
+                    methode: 'POST',
+                    data:{
+                        todo:'obtenir-matieres',
+                    },
+                    dataType:'json'
+                })
+                .done(function(response){
+                    let matieres = response.matieres;
+                    $('#liste-matieres').empty();
+                    $.each(matieres, function(index, matiere){
+                        $('#liste-matieres').append(
+                            '<li><input type="radio" id="'+matiere.name+'" name="matiere" value="'+matiere.name+'"><label for="'+matiere.name+'">'+matiere.name+'</label></li>'
+                        );
+                    });
+                })
+
+                .fail(function(error){
+                    console.log('Erreur:', error);
+                    alert('Erreur lors du chargement des données: HTTP Code '+error.status);
+                });
+            }
+            
+            function validerDemande(){
+              
+
+                    // Récupération de la valeur des champs du formulaire
+                    var matiere = $('#liste-matieres input[type="radio"]:checked').val();
+                    var description = $('#description').val();
+
+                    // Appel AJAX
+                    $.ajax({
+                        url: './ActionServlet',
+                        method: 'POST',
+                        data: {
+                            todo: 'valider-demande',
+                            matiere: matiere,
+                            description: description
+                        },
+                        dataType: 'json'
+                    })
+                    .done( function (response) { // Fonction appelée en cas d'appel AJAX réussi
+                        
+                        if (response.success) {
+                            window.location = "visioconferenceEleve.html";
+                        }
+                        else {
+                            $('#notification').html("Erreur lors de la demande. Veuillez réessayer plus tard..."); // Message pour le paragraphe de notification
+                        }
+                    })
+                    .fail( function (error) { // Fonction appelée en cas d'erreur lors de l'appel AJAX
+                        console.log('Error',error); // LOG dans Console Javascript
+                        alert("Erreur lors de l'appel AJAX");
+                    })
+                    .always( function () { // Fonction toujours appelée    
+                    });
+            }
+            
+            
+            
+            $(document).ready(function(){
+                initDonneesPage();
+                $('#valider').on( 'click', validerDemande);
+            });
+        </script>
     </body>
 </html>
