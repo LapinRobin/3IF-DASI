@@ -26,7 +26,7 @@ and open the template in the editor.
             <input type="date" id="birthdate" name="birthdate"><br>
 
             <label for="code">Code établissement:</label><br>
-            <input type="number" id="code" name="code" min="0"><br>
+            <input type="text" id="code" name="code"><br>
 
             <label for="classe">Classe:</label><br>
             <select id="classe" name="classe">
@@ -45,66 +45,68 @@ and open the template in the editor.
             <label for="password">Mot de passe:</label><br>
             <input type="password" id="password" name="password"><br>
 
-            <input type="submit" value="Je m'inscris">
+            <input type="submit" value="Je m'inscrisssss">
         </form>
     </div>
     <script>
-    $(document).ready( function () {
-        $('form').on( 'submit', function (e) { // Function called when form is submitted
+        $(document).ready( function () {
+            $('form').on( 'submit', function (e) { // Function called when form is submitted
 
-            e.preventDefault(); // Prevent form from being submitted in the default way
-            
-            console.log("clic sur le bouton d'inscription"); // LOG in JavaScript Console
-            $('#notification').html("Inscription..."); // Message for the notification paragraph
+                e.preventDefault(); // Prevent form from being submitted in the default way
 
-            // Get the value of the form fields
-            var nom = $('#nom').val();
-            var prenom = $('#prenom').val();
-            var birthdate = $('#birthdate').val();
-            var code = $('#code').val();
-            var classe = $('#classe').val();
-            var email = $('#email').val();
-            var password = $('#password').val();
+                console.log("clic sur le bouton d'inscription"); // LOG in JavaScript Console
+                $('#notification').html("Inscription..."); // Message for the notification paragraph
 
-            // AJAX Call
-            $.ajax({
-                url: './ActionServlet', 
-                method: 'POST',
-                data: {
-                    todo: 'inscrire-eleve', 
-                    nom: nom,
-                    prenom: prenom,
-                    birthdate: birthdate,
-                    code: code,
-                    classe: classe,
-                    email: email,
-                    password: password
-                },
-                dataType: 'json'
-            })
-            .done( function (response) { // Function called if the AJAX call is successful
-                console.log('Response',response); // LOG in JavaScript Console
-                if (response.creation) {
-                    $('#notification').html("Inscription OK");  // Message for the notification paragraph
-                    // TODO: display the information of the client in the notification
-                    var user = response.eleve;
-                    $('#notification').html("Inscription de "+user.prenom+" "+user.nom+" (ID "+user.id+")");
-                    // window.location = "compteEleve.html?idEleve="+user.id;
-                }
-                else {
-                    $('#notification').html("Erreur d'Inscription"); // Message for the notification paragraph
-                }
-            })
-            .fail( function (error) { // Function called if there is an error during the AJAX call
-                console.log('Error',error); // LOG in JavaScript Console
-                alert("Erreur lors de l'appel AJAX");
-            })
-            .always( function () { // Function always called
-                
+                // Get the value of the form fields
+                var nom = $('#nom').val();
+                var prenom = $('#prenom').val();
+                var birthdate = $('#birthdate').val();
+                var code = $('#code').val();
+                var classe = $('#classe').val();
+                var email = $('#email').val();
+                var password = $('#password').val();
+
+                // AJAX Call
+                $.ajax({
+                    url: './ActionServlet',
+                    method: 'POST',
+                    data: {
+                        todo: 'inscrire-eleve',
+                        nom: nom,
+                        prenom: prenom,
+                        birthdate: birthdate,
+                        code: code,
+                        classe: classe,
+                        email: email,
+                        password: password
+                    },
+                    dataType: 'json'
+                })
+                    .done( function (response) { // Function called if the AJAX call is successful
+                        console.log('Response',response); // LOG in JavaScript Console
+                        if (response.creation) {
+                            $('#notification').html("Inscription OK");  // Message for the notification paragraph
+                            // TODO: display the information of the client in the notification
+                            var user = response.eleve;
+                            $('#notification').html("Inscription de "+user.prenom+" "+user.nom +" (ID "+user.id+")");
+                            // wait for 3 seconds before reloading the page
+                            setTimeout(function(){ window.location = "loginEleve.html"; }, 2000);
+
+                        }
+                        else {
+                            $('#notification').html("Erreur d'Inscription"); // Message for the notification paragraph
+                        }
+                    })
+                    .fail( function (error) { // Function called if there is an error during the AJAX call
+                        console.log('Error',error); // LOG in JavaScript Console
+                        alert("Erreur lors de l'appel AJAX");
+                    })
+                    .always( function () { // Function always called
+
+                    });
             });
         });
-    });
-</script>
+    </script>
 
 </body>
 </html>

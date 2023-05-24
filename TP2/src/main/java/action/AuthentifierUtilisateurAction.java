@@ -29,6 +29,7 @@ public class AuthentifierUtilisateurAction extends Action {
             HttpSession session = request.getSession(true);
             session.setAttribute("idEleve", eleve.getId());
         }
+        System.out.println("Pour la sérialisation : "+eleve);
             
         request.setAttribute("eleve", eleve);       
     }
