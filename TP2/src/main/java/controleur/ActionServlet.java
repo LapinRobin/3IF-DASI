@@ -9,6 +9,7 @@ package controleur;
 import action.AuthentifierIntervenantAction;
 import vue.ProfilUtilisateurSerialisation;
 import action.AuthentifierUtilisateurAction;
+import action.FinaliserInterventionAction;
 import action.InscrireEleveAction;
 import action.ObtenirInterventionsEleveAction;
 import action.ObtenirInterventionsIntervenantAction;
@@ -21,6 +22,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import vue.FinaliserInterventionSerialisation;
 import vue.HistoriqueEleveSerialisation;
 import vue.HistoriqueIntervenantSerialisation;
 import vue.InscrireEleveSerialisation;
@@ -97,6 +99,11 @@ public class ActionServlet extends HttpServlet {
             case "valider-demande" : {
                 new ValiderDemandeAction().executer(request);
                 new ValiderDemandeSerialisation().serialiser(request, response);
+                break;
+            }
+            case "finaliser-intervention" : {
+                new FinaliserInterventionAction().executer(request);
+                new FinaliserInterventionSerialisation().serialiser(request, response);
                 break;
             }
             default : {

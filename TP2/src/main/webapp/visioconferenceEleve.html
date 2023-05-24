@@ -9,6 +9,8 @@ and open the template in the editor.
         <title>Visioconférence</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
         <style>
             body {
                 margin: 0;
@@ -44,7 +46,7 @@ and open the template in the editor.
                 left: 50%;
                 transform: translateX(-50%);
                 background-image: url('resources/img/icon-telephone.png');
-                background-color: red;
+                background-color: #EE0000;
                 background-repeat: no-repeat;
                 background-size: 70% 70%;
                 background-position: center;
@@ -53,14 +55,132 @@ and open the template in the editor.
                 border-radius: 50%;
                 border: none;
               }
+              .phone-button:hover {
+                background-color: #FF3333;
+            }
+                .auto-evaluation {
+                margin-top: 20px;
+                text-align: center;
+            }
+
+            .radio-list {
+                list-style: none;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                margin-bottom: 20px;
+            }
+
+            .radio-list li {
+                margin-right: 20px;
+            }
+
+            .valider-auto-eval {
+                background-color: blue;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+            .valider-auto-eval:hover {
+                background-color: darkblue;
+            }
+            
+            .popup {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .popup .auto-evaluation {
+                background-color: white;
+                padding: 20px;
+                border-radius: 5px;
+            }
+
+            .hidden {
+                display: none;
+            }
         </style>
     </head>
     <body>
         <div class="header">
             <h1>INSTRUCT'IF</h1>
-          </div>
-          <div class="background">
-            <button class="phone-button"></button>
-          </div>
+        </div>
+
+        <div class="background">
+            <button class="phone-button" id="terminer-visio"></button>
+        </div>
+        
+        <div class="popup hidden">
+            <div class="auto-evaluation">
+                <h2>Auto-Évaluation</h2>
+                <ul class="radio-list" id="note-list">
+                    <li>
+                        <input type="radio" id="comprehension-minimale" name="auto-eval" value="1">
+                        <label for="comprehension-minimale">Je n'ai rien compris</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="notions-floues" name="auto-eval" value="2">
+                        <label for="notions-floues">J'ai acquis quelques notions mais cela reste toujours très flou</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="zones-ombre" name="auto-eval" value="3">
+                        <label for="zones-ombre">J'ai acquis quelques notions mais il me reste quelques zones d'ombre</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="tout-compris" name="auto-eval" value="4">
+                        <label for="tout-compris">J'ai tout compris !</label>
+                    </li>
+                </ul>
+                <button class="valider-auto-eval">Valider l'auto-évaluation</button>
+            </div>
+        </div>
+
+        <script>
+            function afficherAutoEval() {
+                $('.popup').removeClass('hidden');
+            }
+            
+            function finaliserIntervention() {
+                var note = $('#note-list input[type="radio"]:checked').val();
+                $.ajax({
+                    url:'./ActionServlet',
+                    methode: 'POST',
+                    data:{
+                        todo:'finaliser-intervention',
+                        note: note
+                    },
+                    dataType:'json'
+                })
+                .done(function(response){
+                    if (response.success) {
+                        window.location = "compteEleve.html";
+                    }
+                    else {
+                        alert('Erreur lors de la finalisation de la consultation.');
+                    }
+                })
+
+                .fail(function(error){
+                    console.log('Erreur:', error);
+                    alert('Erreur lors du chargement des données: HTTP Code '+error.status);
+                });
+            }
+
+            $(document).ready(function() {
+                $('#terminer-visio').on('click', afficherAutoEval);
+                $('#valider-auto-eval').on('click', finaliserIntervention);
+            });
+        </script>
     </body>
 </html>
