@@ -29,7 +29,7 @@ public class InscrireEleveAction extends Action {
             Date birthdate = sdf.parse(birthdateStr);
 
             // Create a Niveau object corresponding to the classe
-            // Assuming that you have a Niveau enum or class. Modify as per your codebase
+            
             Niveau niveau = Niveau.valueOf(classe.toUpperCase());
 
             Eleve eleve = new Eleve(nom, prenom, birthdate, email, password, niveau);
@@ -38,6 +38,7 @@ public class InscrireEleveAction extends Action {
             service.inscriptionEleve(eleve, code);
 
             boolean creation;
+
         if(eleve.getId() != null) {
             creation = true;
             HttpSession session = request.getSession(true);

@@ -88,7 +88,7 @@ and open the template in the editor.
                     $('#notification').html("Inscription OK");  // Message for the notification paragraph
                     // TODO: display the information of the client in the notification
                     var user = response.eleve;
-                    $('#notification').html("Inscription de "+user.prenom+" "+user.nom+" (ID "+user.id+")");
+                    $('#notification').html("Inscription de "+user.prenom+" "+user.nom);//+" (ID "+user.id+")");
                     // window.location = "compteEleve.html?idEleve="+user.id;
                 }
                 else {

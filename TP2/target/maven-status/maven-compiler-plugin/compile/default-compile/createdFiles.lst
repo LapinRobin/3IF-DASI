@@ -1,8 +1,13 @@
 action\Action.class
-controleur\ActionServlet.class
 vue\ProfilUtilisateurSerialisation.class
+vue\HistoriqueIntervenantSerialisation.class
 action\AuthentifierUtilisateurAction.class
+action\InscrireEleveAction.class
 vue\HistoriqueEleveSerialisation.class
+vue\InscrireEleveSerialisation.class
 action\ObtenirInterventionsEleveAction.class
 action\TestUtilisateur.class
+action\ObtenirInterventionsIntervenantAction.class
+vue\ProfilIntervenantSerialisation.class
+action\AuthentifierIntervenantAction.class
 vue\Serialisation.class
