@@ -1,8 +1,0 @@
-.idea/
-*.class
-*.iml
-*.xml
-*.jar
-*.war
-*.ear
-/target/
