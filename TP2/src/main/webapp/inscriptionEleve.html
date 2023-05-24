@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>INSTRUCT'IF</title>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+    <div class="form-container">
+        <h1>INSTRUCT'IF</h1>
+        <p id="notification">Veuillez vous inscrire</p>
+        <form>
+            <label for="nom">Nom:</label><br>
+            <input type="text" id="nom" name="nom"><br>
+
+            <label for="prenom">Prénom:</label><br>
+            <input type="text" id="prenom" name="prenom"><br>
+
+            <label for="birthdate">Date de naissance:</label><br>
+            <input type="date" id="birthdate" name="birthdate"><br>
+
+            <label for="code">Code établissement:</label><br>
+            <input type="text" id="code" name="code"><br>
+
+            <label for="classe">Classe:</label><br>
+            <select id="classe" name="classe">
+                <option value="terminale">Terminale</option>
+                <option value="premiere">Première</option>
+                <option value="seconde">Seconde</option>
+                <option value="troisieme">3ème</option>
+                <option value="quatrieme">4ème</option>
+                <option value="cinquieme">5ème</option>
+                <option value="sixieme">6ème</option>
+            </select><br>
+
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email"><br>
+
+            <label for="password">Mot de passe:</label><br>
+            <input type="password" id="password" name="password"><br>
+
+            <input type="submit" value="Je m'inscrisssss">
+        </form>
+    </div>
+    <script>
+        $(document).ready( function () {
+            $('form').on( 'submit', function (e) { // Function called when form is submitted
+
+                e.preventDefault(); // Prevent form from being submitted in the default way
+
+                console.log("clic sur le bouton d'inscription"); // LOG in JavaScript Console
+                $('#notification').html("Inscription..."); // Message for the notification paragraph
+
+                // Get the value of the form fields
+                var nom = $('#nom').val();
+                var prenom = $('#prenom').val();
+                var birthdate = $('#birthdate').val();
+                var code = $('#code').val();
+                var classe = $('#classe').val();
+                var email = $('#email').val();
+                var password = $('#password').val();
+
+                // AJAX Call
+                $.ajax({
+                    url: './ActionServlet',
+                    method: 'POST',
+                    data: {
+                        todo: 'inscrire-eleve',
+                        nom: nom,
+                        prenom: prenom,
+                        birthdate: birthdate,
+                        code: code,
+                        classe: classe,
+                        email: email,
+                        password: password
+                    },
+                    dataType: 'json'
+                })
+                    .done( function (response) { // Function called if the AJAX call is successful
+                        console.log('Response',response); // LOG in JavaScript Console
+                        if (response.creation) {
+                            $('#notification').html("Inscription OK");  // Message for the notification paragraph
+                            // TODO: display the information of the client in the notification
+                            var user = response.eleve;
+                            $('#notification').html("Inscription de "+user.prenom+" "+user.nom +" (ID "+user.id+")");
+                            // wait for 3 seconds before reloading the page
+                            setTimeout(function(){ window.location = "loginEleve.html"; }, 2000);
+
+                        }
+                        else {
+                            $('#notification').html("Erreur d'Inscription"); // Message for the notification paragraph
+                        }
+                    })
+                    .fail( function (error) { // Function called if there is an error during the AJAX call
+                        console.log('Error',error); // LOG in JavaScript Console
+                        alert("Erreur lors de l'appel AJAX");
+                    })
+                    .always( function () { // Function always called
+
+                    });
+            });
+        });
+    </script>
+
+</body>
+</html>
