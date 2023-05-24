@@ -42,14 +42,12 @@ and open the template in the editor.
         
         <script>
             function initDonneesPage(){
-                let idEleve = (new URLSearchParams(window.location.search)).get('idEleve');
-                
+               
                 $.ajax({
                     url:'./ActionServlet',
                     methode: 'POST',
                     data:{
                         todo:'consulter-historique-eleve',
-                        idEleve:idEleve
                     },
                     dataType:'json'
                 })

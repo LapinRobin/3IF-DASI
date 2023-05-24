@@ -7,7 +7,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import metier.modele.Etablissement;
 import metier.modele.Niveau;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2023-05-23T18:41:40")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2023-05-24T16:09:47")
 @StaticMetamodel(Eleve.class)
 public class Eleve_ { 
 

@@ -12,6 +12,8 @@ import action.AuthentifierUtilisateurAction;
 import action.InscrireEleveAction;
 import action.ObtenirInterventionsEleveAction;
 import action.ObtenirInterventionsIntervenantAction;
+import action.ObtenirMatieresAction;
+import action.ValiderDemandeAction;
 import dao.JpaUtil;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -22,7 +24,9 @@ import javax.servlet.http.HttpServletResponse;
 import vue.HistoriqueEleveSerialisation;
 import vue.HistoriqueIntervenantSerialisation;
 import vue.InscrireEleveSerialisation;
+import vue.ObtenirMatieresSerialisation;
 import vue.ProfilIntervenantSerialisation;
+import vue.ValiderDemandeSerialisation;
 
 /**
  *
@@ -35,7 +39,6 @@ public class ActionServlet extends HttpServlet {
     public void init() throws ServletException {
         super.init(); //To change body of generated methods, choose Tools | Templates.
         JpaUtil.creerFabriquePersistance();
-        // new ServiceAdmin().initialiser();
     }
 
     @Override
@@ -84,6 +87,16 @@ public class ActionServlet extends HttpServlet {
             case "inscrire-eleve" : {
                 new InscrireEleveAction().executer(request);
                 new InscrireEleveSerialisation().serialiser(request, response);
+                break;
+            }
+            case "obtenir-matieres" : {
+                new ObtenirMatieresAction().executer(request);
+                new ObtenirMatieresSerialisation().serialiser(request, response);
+                break;
+            }
+            case "valider-demande" : {
+                new ValiderDemandeAction().executer(request);
+                new ValiderDemandeSerialisation().serialiser(request, response);
                 break;
             }
             default : {

@@ -22,12 +22,11 @@ import javax.servlet.http.HttpSession;
 public class ObtenirInterventionsIntervenantAction extends Action{
     public void executer(HttpServletRequest request) {
         System.out.println("appel de ObtenirInterventionsIntervenantAction");
-        Long idIntervenantRequest = Long.valueOf((String)request.getParameter("idIntervenant")) ;
         HttpSession session = request.getSession(true);
         Long idIntervenantSession = (Long) session.getAttribute("idIntervenant");
         
         List<Intervention> interventions = null;
-        if(idIntervenantSession != null && Objects.equals(idIntervenantRequest, idIntervenantSession)){
+        if(idIntervenantSession != null){
             ServiceClient service = new ServiceClient();
             Intervenant intervenant = service.trouverIntervenantParId(idIntervenantSession);
             interventions = service.listerInterventionsPourIntervenant(intervenant); 

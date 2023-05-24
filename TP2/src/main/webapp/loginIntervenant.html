@@ -54,7 +54,7 @@
                             // Exemple: Connexion de Ada Lovelace (ID 1)
                             var user = response.intervenant;
                             $('#notification').html("Connexion de "+user.prenom+" "+user.nom+" (ID "+user.id+")");
-                            window.location = "compteIntervenant.html?idIntervenant="+user.id;
+                            window.location = "compteIntervenant.html";
                         }
                         else {
                             $('#notification').html("Erreur de Connexion"); // Message pour le paragraphe de notification

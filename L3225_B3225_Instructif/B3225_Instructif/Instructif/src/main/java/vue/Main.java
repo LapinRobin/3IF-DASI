@@ -33,7 +33,7 @@ public class Main {
         JpaUtil.creerFabriquePersistance();
         initialiser();
 
-        boolean mRun = true;
+       /* boolean mRun = true;
 
         while (mRun) {
 
@@ -119,6 +119,7 @@ public class Main {
                     System.out.println("Option non valide. Essayez à nouveau.");
             }
         }
+        */
 
         JpaUtil.fermerFabriquePersistance();
     }
