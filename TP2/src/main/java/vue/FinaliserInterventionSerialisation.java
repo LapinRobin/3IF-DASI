@@ -25,7 +25,7 @@ public class FinaliserInterventionSerialisation extends Serialisation {
         
         JsonObject container = new JsonObject();
         
-        boolean success = (boolean) request.getAttribute("succes");
+        boolean success = (boolean) request.getAttribute("success");
         container.addProperty("success", success);
    
 

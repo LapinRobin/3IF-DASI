@@ -9,6 +9,8 @@ and open the template in the editor.
         <title>Compte Intervenant</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="resources/css/compteIntervenant.css">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     </head>
     <body>
@@ -41,8 +43,38 @@ and open the template in the editor.
         
         <br/>
         
+        <h2>Statistiques</h2>
+        <h3>Nombres d'interventions par matières :</h3>
+        <!--<ul id="liste-interventions-matieres">
+            <li>Français : 0</li>
+            <li>Maths : 0</li>
+            <li>Histoire - Géo : 0</li>
+        </ul>-->
+        <p id="total-interventions">Nombre d'interventions total : 0</p>
+        
+        <div class="chart-container">
+            <canvas id="camembertChart"></canvas>
+        </div>
+        
+        <div class="popup hidden">
+            <div class="demande-visio">
+                <h2>Demande de visio !</h2>
+                <p id="matiere"></p>
+                <p id="description"></p>
+                <p id="heure"></p>
+                <div class="profil-eleve">
+                    <p id="nom"></p>
+                    <p id="prenom"></p>
+                    <p id="classe"></p>
+                    <p id="etablissement"></p>
+                </div>
+                <button class="lancer-appel" id="lancer-appel">Lancer l'appel</button>
+            </div>
+        </div>
+        
         
         <script>
+          
             function initDonneesPage(){
                 
                 $.ajax({
@@ -55,9 +87,10 @@ and open the template in the editor.
                 })
                 .done(function(response){
                     let interventions = response.interventions;
-                    $('#liste-demandes tbody').empty();
+                    
+                    $('#liste-interventions tbody').empty();
                     $.each(interventions, function(index, intervention){
-                        $('#liste-demandes tbody').append(
+                        $('#liste-interventions tbody').append(
                             '<tr>'+
                                 '<td>'+intervention.date+'</td>'+
                                 '<td>'+intervention.matiere+'</td>'+
@@ -68,18 +101,123 @@ and open the template in the editor.
                             '</tr>'
                         );
                     });
+                    
                 })
 
                 .fail(function(error){
                     console.log('Erreur:', error);
-                    alert('Erreur lors du chargement des données: HTTP Code '+error.status);
+                    alert('Erreur lors du chargement des données des interventions: HTTP Code '+error.status);
+                });
+                
+                $.ajax({
+                    url:'./ActionServlet',
+                    methode: 'POST',
+                    data:{
+                        todo:'consulter-statistiques',
+                    },
+                    dataType:'json'
+                })
+                .done(function(response){
+                    /*let matieres = response.matieres;
+                    let total = response.nbTotal;
+                    $('#liste-interventions-matieres').empty();
+                    $.each(matieres, function(index, matiere){
+                        $('#liste-interventions-matieres').append(
+                            '<li>'+
+                                matiere.name+' : '+matiere.interventions+
+                            '</li>'
+                        );
+                    });
+                    
+                     */
+                    let matieres = response.matieres;
+                    let total = response.nbTotal;
+
+                    // Création des tableaux de données pour le graphique
+                    let labels = [];
+                    let data = [];
+                    let colors = [];
+
+                    $.each(matieres, function(index, matiere) {
+                      labels.push(matiere.name);
+                      data.push(matiere.interventions);
+                      colors.push(getRandomColor()); // Fonction pour générer des couleurs aléatoires (définie ci-dessous)
+                    });
+
+                    // Création du graphique
+                    let ctx = document.getElementById('camembertChart').getContext('2d');
+                    let camembertChart = new Chart(ctx, {
+                      type: 'pie',
+                      data: {
+                        labels: labels,
+                        datasets: [{
+                          data: data,
+                          backgroundColor: colors
+                        }]
+                      },
+                      options: {
+                        responsive: true
+                      }
+                    });
+
+                    // Fonction pour générer une couleur aléatoire en format hexadécimal
+                    function getRandomColor() {
+                      let letters = '0123456789ABCDEF';
+                      let color = '#';
+                      for (let i = 0; i < 6; i++) {
+                        color += letters[Math.floor(Math.random() * 16)];
+                      }
+                      return color;
+                    }
+                    
+                    $('#total-interventions').empty();
+                    $('#total-interventions').append("Nombre d'interventions total : "+total);
+                })
+
+                .fail(function(error){
+                    console.log('Erreur:', error);
+                    alert('Erreur lors du chargement des données statistiques: HTTP Code '+error.status);
                 });
             }
             
-            
+            var intervalId;
+            function obtenirDemandeVisio(){
+                $.ajax({
+                    url:'./ActionServlet',
+                    methode: 'POST',
+                    data:{
+                        todo:'obtenir-demande',
+                    },
+                    dataType:'json'
+                })
+                .done(function(response){
+                    let demande = response.demande;
+                    
+                    if(response.demandeEnAttente){
+                        $('#matiere').append('Matière concernée : '+demande.matiere);
+                        $('#description').append('Description de la demande : '+demande.description);
+                        $('#heure').append('Heure de la demande : '+demande.heure);
+                        $('#nom').append('Nom : '+demande.nom);
+                        $('#prenom').append('Prenom : '+demande.prenom);
+                        $('#classe').append('Classe : '+demande.classe);
+                        $('#etablissement').append('Etablissement : '+demande.etablissement);
+                        
+                        $('.popup').removeClass('hidden');
+                        
+                        clearInterval(intervalId);
+                    }
+                })
+                .fail(function(error){
+                    console.log('Erreur:', error);
+                    alert('Erreur lors du chargement des données de la demande en cours HTTP Code '+error.status);
+                });
+            }
             
             $(document).ready(function(){
                 initDonneesPage();
+                intervalId = setInterval(function() {
+                    obtenirDemandeVisio();
+                  }, 20000); // 20 secondes en millisecondes
             });
         </script>
             

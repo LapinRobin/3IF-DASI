@@ -53,7 +53,8 @@ h1 {
 /* Styles pour le sous-titre */
 
 h2,
-p{
+p,
+label{
   color: #0000ff;
 }
 

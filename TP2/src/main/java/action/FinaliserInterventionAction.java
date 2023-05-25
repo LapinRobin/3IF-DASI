@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import metier.modele.Eleve;
 import metier.modele.Intervention;
-import static metier.modele.Intervention_.description;
-import static metier.modele.Intervention_.matiere;
 import metier.service.ServiceClient;
 
 /*

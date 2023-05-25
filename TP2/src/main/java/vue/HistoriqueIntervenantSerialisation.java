@@ -43,10 +43,10 @@ public class HistoriqueIntervenantSerialisation extends Serialisation{
             jsonIntervention.addProperty("duree", i.getDureeEnMinutes());
             jsonIntervention.addProperty("note", i.getNote());
             
-            JsonObject jsonIntervenant = new JsonObject();
-            jsonIntervenant.addProperty("nom", i.getIntervenant().getNom());
-            jsonIntervenant.addProperty("prenom", i.getIntervenant().getPrenom());
-            jsonIntervention.add("intervenant", jsonIntervenant);
+            JsonObject jsonEleve = new JsonObject();
+            jsonEleve.addProperty("nom", i.getEleve().getNom());
+            jsonEleve.addProperty("prenom", i.getEleve().getPrenom());
+            jsonIntervention.add("eleve", jsonEleve);
             
             jsonListeInterventions.add(jsonIntervention);
         }

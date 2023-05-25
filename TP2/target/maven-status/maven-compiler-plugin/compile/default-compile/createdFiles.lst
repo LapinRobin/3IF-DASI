@@ -10,6 +10,8 @@ action\InscrireEleveAction.class
 vue\HistoriqueEleveSerialisation.class
 vue\InscrireEleveSerialisation.class
 action\ObtenirInterventionsEleveAction.class
+vue\FinaliserInterventionSerialisation.class
+action\FinaliserInterventionAction.class
 action\TestUtilisateur.class
 vue\ValiderDemandeSerialisation.class
 action\ObtenirInterventionsIntervenantAction.class

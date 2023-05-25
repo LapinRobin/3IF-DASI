@@ -6,14 +6,17 @@ package controleur;
  * and open the template in the editor.
  */
 
+import vue.ObtenirStatsSerialisation;
 import action.AuthentifierIntervenantAction;
 import vue.ProfilUtilisateurSerialisation;
 import action.AuthentifierUtilisateurAction;
 import action.FinaliserInterventionAction;
 import action.InscrireEleveAction;
+import action.ObtenirDemandeAction;
 import action.ObtenirInterventionsEleveAction;
 import action.ObtenirInterventionsIntervenantAction;
 import action.ObtenirMatieresAction;
+import action.ObtenirStatsAction;
 import action.ValiderDemandeAction;
 import dao.JpaUtil;
 import java.io.IOException;
@@ -26,6 +29,7 @@ import vue.FinaliserInterventionSerialisation;
 import vue.HistoriqueEleveSerialisation;
 import vue.HistoriqueIntervenantSerialisation;
 import vue.InscrireEleveSerialisation;
+import vue.ObtenirDemandeSerialisation;
 import vue.ObtenirMatieresSerialisation;
 import vue.ProfilIntervenantSerialisation;
 import vue.ValiderDemandeSerialisation;
@@ -96,6 +100,11 @@ public class ActionServlet extends HttpServlet {
                 new ObtenirMatieresSerialisation().serialiser(request, response);
                 break;
             }
+            case "obtenir-demande" : {
+                new ObtenirDemandeAction().executer(request);
+                new ObtenirDemandeSerialisation().serialiser(request, response);
+                break;
+            }
             case "valider-demande" : {
                 new ValiderDemandeAction().executer(request);
                 new ValiderDemandeSerialisation().serialiser(request, response);
@@ -104,6 +113,11 @@ public class ActionServlet extends HttpServlet {
             case "finaliser-intervention" : {
                 new FinaliserInterventionAction().executer(request);
                 new FinaliserInterventionSerialisation().serialiser(request, response);
+                break;
+            }
+            case "consulter-statistiques" : {
+                new ObtenirStatsAction().executer(request);
+                new ObtenirStatsSerialisation().serialiser(request, response);
                 break;
             }
             default : {
