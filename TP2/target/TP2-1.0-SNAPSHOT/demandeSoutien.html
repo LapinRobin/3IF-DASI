@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Demande de soutien</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <style>
+            .logout-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            }
+            
+            .subjects-list {
+                list-style-type: none;
+                padding: 0;
+                display: flex;
+            }
+
+              .subjects-list li {
+                margin-right: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <button class="logout-button">Déconnexion</button>
+        <h1>Demande de cours</h1>
+        <h2>Nouvelle demande</h2>
+
+        <label for="matiere">Matière concernée:</label>
+        <ul class="subjects-list" id="liste-matieres">
+            <li><input type="radio" id="svt" name="matiere" value="svt"><label for="svt">SVT</label></li>  
+        </ul>
+
+        <br><br>
+
+        <label for="description">Description de la demande:</label>
+        <br>
+        <textarea id="description" name="description" rows="4" cols="50"></textarea>
+
+        <br><br>
+
+        <button id="valider" name="valider">Valider la demande</button>
+        <p id="notification"></p>
+        
+        <script>
+            function initDonneesPage(){
+                
+                $.ajax({
+                    url:'./ActionServlet',
+                    methode: 'POST',
+                    data:{
+                        todo:'obtenir-matieres',
+                    },
+                    dataType:'json'
+                })
+                .done(function(response){
+                    let matieres = response.matieres;
+                    $('#liste-matieres').empty();
+                    $.each(matieres, function(index, matiere){
+                        $('#liste-matieres').append(
+                            '<li><input type="radio" id="'+matiere.name+'" name="matiere" value="'+matiere.name+'"><label for="'+matiere.name+'">'+matiere.name+'</label></li>'
+                        );
+                    });
+                })
+
+                .fail(function(error){
+                    console.log('Erreur:', error);
+                    alert('Erreur lors du chargement des données: HTTP Code '+error.status);
+                });
+            }
+            
+            function validerDemande(){
+              
+
+                    // Récupération de la valeur des champs du formulaire
+                    var matiere = $('#liste-matieres input[type="radio"]:checked').val();
+                    var description = $('#description').val();
+
+                    // Appel AJAX
+                    $.ajax({
+                        url: './ActionServlet',
+                        method: 'POST',
+                        data: {
+                            todo: 'valider-demande',
+                            matiere: matiere,
+                            description: description
+                        },
+                        dataType: 'json'
+                    })
+                    .done( function (response) { // Fonction appelée en cas d'appel AJAX réussi
+                        
+                        if (response.success) {
+                            window.location = "visioconferenceEleve.html";
+                        }
+                        else {
+                            $('#notification').html("Erreur lors de la demande. Veuillez réessayer plus tard..."); // Message pour le paragraphe de notification
+                        }
+                    })
+                    .fail( function (error) { // Fonction appelée en cas d'erreur lors de l'appel AJAX
+                        console.log('Error',error); // LOG dans Console Javascript
+                        alert("Erreur lors de l'appel AJAX");
+                    })
+                    .always( function () { // Fonction toujours appelée    
+                    });
+            }
+            
+            
+            
+            $(document).ready(function(){
+                initDonneesPage();
+                $('#valider').on( 'click', validerDemande);
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Visioconférence</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="resources/css/visioconference.css">
+    </head>
+    <body>
+        <div class="barre-haut">
+            <h1>Instruct'if</h1>
+        </div>
+
+        <div class="background">
+            <button class="phone-button" id="terminer-visio"></button>
+        </div>
+        
+        <div class="popup hidden">
+            <div class="auto-evaluation">
+                <h2>Auto-Évaluation</h2>
+                <ul class="radio-list" id="note-list">
+                    <li>
+                        <input type="radio" id="comprehension-minimale" name="auto-eval" value="1">
+                        <label for="comprehension-minimale">Je n'ai rien compris
+                            <img src="resources/img/angry.png" alt="angry">
+                        </label>
+                    </li>
+                    <li>
+                        <input type="radio" id="notions-floues" name="auto-eval" value="2">
+                        <label for="notions-floues">
+                            J'ai acquis quelques notions mais cela reste toujours très flou
+                            <img src="resources/img/less-angry.png" alt="less angry">
+                        </label>
+                    </li>
+                    <li>
+                        <input type="radio" id="zones-ombre" name="auto-eval" value="3">
+                        <label for="zones-ombre">
+                            J'ai acquis quelques notions mais il me reste quelques zones d'ombre
+                            <img src="resources/img/less-happy.png" alt="less happy">
+                        </label>
+                    </li>
+                    <li>
+                        <input type="radio" id="tout-compris" name="auto-eval" value="4">
+                        <label for="tout-compris">
+                            J'ai tout compris !
+                            <img src="resources/img/happy.png" alt="Happy">
+                        </label>
+                    </li>
+                </ul>
+                <button class="valider-auto-eval" id="valider-auto-eval">Valider l'auto-évaluation</button>
+            </div>
+        </div>
+
+        <script>
+            function afficherAutoEval() {
+                $('.popup').removeClass('hidden');
+            }
+            
+            function finaliserIntervention() {
+                var note = $('#note-list input[type="radio"]:checked').val();
+                $.ajax({
+                    url:'./ActionServlet',
+                    methode: 'POST',
+                    data:{
+                        todo:'finaliser-intervention',
+                        note: note
+                    },
+                    dataType:'json'
+                })
+                .done(function(response){
+                    if (response.success) {
+                        window.location = "compteEleve.html";
+                    }
+                    else {
+                        alert('Erreur lors de la finalisation de la consultation.');
+                    }
+                })
+
+                .fail(function(error){
+                    console.log('Erreur:', error);
+                    alert('Erreur lors du chargement des données: HTTP Code '+error.status);
+                });
+            }
+
+            $(document).ready(function() {
+                $('#terminer-visio').on('click', afficherAutoEval);
+                $('#valider-auto-eval').on('click', finaliserIntervention);
+            });
+        </script>
+    </body>
+</html>

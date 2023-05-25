@@ -1,0 +1,140 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 24 mai 2023, 20:36:01
+    Author     : acremona
+*/
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Styles pour le titre */
+h1 {
+  display: flex;
+  align-items: center; /* Centre verticalement */
+  justify-content: center; /* Centre horizontalement */
+  text-align: center;
+  font-family: "Impact", sans-serif;
+  font-weight: bold;
+  font-size: 48px;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-shadow: 0 0 10px #0000FF;
+  font-style: italic;
+  
+}
+
+/* Styles pour la barre horizontale en haut de la page */
+.barre-haut {
+  display: flex;
+  align-items: center; /* Centre verticalement */
+  justify-content: center; /* Centre horizontalement */
+  position: fixed;
+  top: 0;
+  left: 0;   
+  height: 58px;
+  width: 100%;
+  background-color: #d3a4f7;
+  border-bottom: 2px solid #0000ff;
+}
+
+.background {
+    position: absolute;
+    top: 58px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("background_visio.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+}
+
+h2,
+p{
+  color: #0000ff;
+}
+
+.phone-button {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-image: url("icon-telephone.png");
+    background-color: #EE0000;
+    background-repeat: no-repeat;
+    background-size: 70% 70%;
+    background-position: center;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: none;
+}
+  .phone-button:hover {
+    background-color: #FF3333;
+}
+    .auto-evaluation {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.radio-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.radio-list li {
+    margin-right: 20px;
+}
+
+.valider-auto-eval {
+    background-color: blue;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.valider-auto-eval:hover {
+    background-color: darkblue;
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup .auto-evaluation {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.hidden {
+    display: none;
+}
+
+.radio-list img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  /* Ajoutez d'autres styles personnalisés pour les images si nécessaire */
+}
