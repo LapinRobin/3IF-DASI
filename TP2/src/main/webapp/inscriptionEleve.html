@@ -102,7 +102,10 @@ and open the template in the editor.
                     // TODO: display the information of the client in the notification
                     var user = response.eleve;
                     $('#notification').html("Inscription de "+user.prenom+" "+user.nom+" (ID "+user.id+")");
-                    // window.location = "compteEleve.html?idEleve="+user.id;
+
+                    setTimeout(function(){
+                        window.location = "loginEleve.html"
+                    }, 3000);
                 }
                 else {
                     $('#notification').html("Erreur d'Inscription"); // Message for the notification paragraph
