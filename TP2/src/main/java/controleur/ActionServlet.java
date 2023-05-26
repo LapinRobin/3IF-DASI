@@ -6,6 +6,7 @@ package controleur;
  * and open the template in the editor.
  */
 
+import action.AccepterDemandeAction;
 import vue.ObtenirStatsSerialisation;
 import action.AuthentifierIntervenantAction;
 import vue.ProfilUtilisateurSerialisation;
@@ -13,6 +14,7 @@ import action.AuthentifierUtilisateurAction;
 import action.FinaliserInterventionAction;
 import action.InscrireEleveAction;
 import action.ObtenirDemandeAction;
+import action.ObtenirFinaliserInterventionAction;
 import action.ObtenirInterventionsEleveAction;
 import action.ObtenirInterventionsIntervenantAction;
 import action.ObtenirMatieresAction;
@@ -25,11 +27,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import vue.AccepterDemandeSerialisation;
 import vue.FinaliserInterventionSerialisation;
 import vue.HistoriqueEleveSerialisation;
 import vue.HistoriqueIntervenantSerialisation;
 import vue.InscrireEleveSerialisation;
 import vue.ObtenirDemandeSerialisation;
+import vue.ObtenirFinaliserInterventionSerialisation;
 import vue.ObtenirMatieresSerialisation;
 import vue.ProfilIntervenantSerialisation;
 import vue.ValiderDemandeSerialisation;
@@ -105,6 +109,11 @@ public class ActionServlet extends HttpServlet {
                 new ObtenirDemandeSerialisation().serialiser(request, response);
                 break;
             }
+            case "accepter-demande" : {
+                new AccepterDemandeAction().executer(request);
+                new AccepterDemandeSerialisation().serialiser(request, response);
+                break;
+            }
             case "valider-demande" : {
                 new ValiderDemandeAction().executer(request);
                 new ValiderDemandeSerialisation().serialiser(request, response);
@@ -113,6 +122,11 @@ public class ActionServlet extends HttpServlet {
             case "finaliser-intervention" : {
                 new FinaliserInterventionAction().executer(request);
                 new FinaliserInterventionSerialisation().serialiser(request, response);
+                break;
+            }
+            case "obtenir-finaliser-intervention" : {
+                new ObtenirFinaliserInterventionAction().executer(request);
+                new ObtenirFinaliserInterventionSerialisation().serialiser(request, response);
                 break;
             }
             case "consulter-statistiques" : {

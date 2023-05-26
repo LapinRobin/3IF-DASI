@@ -25,16 +25,8 @@ and open the template in the editor.
                 <th>Intervenant</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>01/05/2023</td>
-                <td>Mathématiques</td>
-                <td>Exercices sur les équations</td>
-                <td>35</td>
-                <td>4</td>
-                <td>Professeur Smith</td>
-              </tr>
-            </tbody>
+            <tbody></tbody>
+            
         </table>
         
         <br/>
@@ -70,7 +62,7 @@ and open the template in the editor.
 
                 .fail(function(error){
                     console.log('Erreur:', error);
-                    alert('Erreur lors du chargement des données: HTTP Code '+error.status);
+                    alert('La session a expiré, impossible de charger les données de l\'élève : HTTP Code '+error.status);
                 });
             }
             

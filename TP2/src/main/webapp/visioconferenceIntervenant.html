@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Visioconférence</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="resources/css/visioconference.css">
+    </head>
+    <body>
+        <div class="barre-haut">
+            <h1>Instruct'if</h1>
+        </div>
+
+        <div class="background">
+            
+        </div>
+        
+        
+
+        <script>
+            function obtenirFinaliserIntervention() {
+                $.ajax({
+                    url:'./ActionServlet',
+                    method: 'POST',
+                    data:{
+                        todo:'obtenir-finaliser-intervention'
+                    },
+                    dataType:'json'
+                })
+                .done(function(response){
+                    if (response.deconnexion) {
+                        window.location = "compteIntervenant.html";
+                    }
+                    else {
+                        alert('Erreur lors de la finalisation de la consultation.');
+                    }
+                })
+                .fail(function(error){
+                    console.log('Erreur:', error);
+                    alert('Erreur lors du chargement des données: HTTP Code '+error.status);
+                });
+            }
+
+            $(document).ready(function() {
+
+                // Call obtenirFinaliserIntervention every 3 seconds
+                setInterval(obtenirFinaliserIntervention, 3000);
+            });
+        </script>
+    </body>
+</html>

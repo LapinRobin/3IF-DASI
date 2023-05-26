@@ -29,16 +29,8 @@ and open the template in the editor.
                 <th>Eleve</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>01/05/2023</td>
-                <td>Mathématiques</td>
-                <td>Exercices sur les équations</td>
-                <td>35</td>
-                <td>4</td>
-                <td>Student lambda</td>
-              </tr>
-            </tbody>
+            <tbody></tbody>
+            
         </table>
         
         <br/>
@@ -106,7 +98,7 @@ and open the template in the editor.
 
                 .fail(function(error){
                     console.log('Erreur:', error);
-                    alert('Erreur lors du chargement des données des interventions: HTTP Code '+error.status);
+                    alert('La session a expiré, impossible de charger les données de l\'intervenant : HTTP Code '+error.status);
                 });
                 
                 $.ajax({
@@ -118,18 +110,7 @@ and open the template in the editor.
                     dataType:'json'
                 })
                 .done(function(response){
-                    /*let matieres = response.matieres;
-                    let total = response.nbTotal;
-                    $('#liste-interventions-matieres').empty();
-                    $.each(matieres, function(index, matiere){
-                        $('#liste-interventions-matieres').append(
-                            '<li>'+
-                                matiere.name+' : '+matiere.interventions+
-                            '</li>'
-                        );
-                    });
-                    
-                     */
+
                     let matieres = response.matieres;
                     let total = response.nbTotal;
 
@@ -184,7 +165,7 @@ and open the template in the editor.
             function obtenirDemandeVisio(){
                 $.ajax({
                     url:'./ActionServlet',
-                    methode: 'POST',
+                    method: 'POST',
                     data:{
                         todo:'obtenir-demande',
                     },
@@ -213,11 +194,38 @@ and open the template in the editor.
                 });
             }
             
+            function accepterDemande() {
+                $.ajax({
+                    url:'./ActionServlet',
+                    method: 'POST',
+                    data:{
+                        todo:'accepter-demande',
+
+                    },
+                    dataType:'json'
+                })
+                .done(function(response){
+                    // If you expect some response after the request, handle it here
+
+                    // Once the demand is accepted, you may want to redirect to a visio page
+                    // assuming the redirect URL comes with the response
+                    if(response.accepte){
+                        window.location.href = "visioconferenceIntervenant.html";
+                    }
+                })
+                .fail(function(error){
+                    console.log('Erreur:', error);
+                    alert('Erreur lors de l\'acceptation de la demande HTTP Code '+error.status);
+                });
+                
+            }
+            
             $(document).ready(function(){
                 initDonneesPage();
                 intervalId = setInterval(function() {
                     obtenirDemandeVisio();
-                  }, 20000); // 20 secondes en millisecondes
+                  }, 2000); // 20 secondes en millisecondes
+                $('#lancer-appel').on('click', accepterDemande);
             });
         </script>
             

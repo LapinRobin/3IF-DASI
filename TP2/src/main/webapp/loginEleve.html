@@ -60,12 +60,12 @@
                             $('#notification').html("Connexion OK");  // Message pour le paragraphe de notification
                             // TODO: afficher les informations du client dans la notification
                             // Exemple: Connexion de Ada Lovelace (ID 1)
-                            var user = response.eleve;
-                            $('#notification').html("Connexion de "+user.prenom+" "+user.nom+" (ID "+user.id+")");
+                            // var user = response.eleve;
+                            // $('#notification').html("Connexion de "+user.prenom+" "+user.nom+" (ID "+user.id+")");
                             window.location = "compteEleve.html";
                         }
                         else {
-                            $('#notification').html("Erreur de Connexion"); // Message pour le paragraphe de notification
+                            $('#notification').html("Email ou mot de passe incorrect"); // Message pour le paragraphe de notification
                         }
                     })
                     .fail( function (error) { // Fonction appelée en cas d'erreur lors de l'appel AJAX

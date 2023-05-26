@@ -1,5 +1,9 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package vue;
-
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -8,25 +12,18 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import metier.modele.Intervenant;
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  *
- * @author acremona
+ * @author ysu
  */
-public class FinaliserInterventionSerialisation extends Serialisation {
+public class ObtenirFinaliserInterventionSerialisation extends Serialisation {
     public void serialiser(HttpServletRequest request, HttpServletResponse response) throws IOException {
         
         JsonObject container = new JsonObject();
         
-        boolean deconnexion = (boolean) request.getAttribute("deconnexion");
-        container.addProperty("deconnexion", deconnexion);
+        boolean success = (boolean) request.getAttribute("success");
+        container.addProperty("success", success);
    
 
         Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
