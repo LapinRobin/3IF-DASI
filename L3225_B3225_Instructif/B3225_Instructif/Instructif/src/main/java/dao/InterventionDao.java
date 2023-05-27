@@ -77,10 +77,15 @@ public class InterventionDao {
     
     public Intervention getInterventionEnCours(Eleve eleve) {
         String s = "SELECT i FROM Intervention i where i.eleve.id = :eleve AND i.note is null";
-        TypedQuery query;
-        query = JpaUtil.obtenirContextePersistance().createQuery(s, Intervention.class);
+        TypedQuery<Intervention> query = JpaUtil.obtenirContextePersistance().createQuery(s, Intervention.class);
         query.setParameter("eleve", eleve.getId());
-        return (Intervention)query.getSingleResult();
+
+        List<Intervention> results = query.getResultList();
+        if (!results.isEmpty()) {
+            // assumes the query should return a single result, so take the first one
+            return results.get(0);
+        }
+        return null;  // no Intervention found for the given Eleve
     }
     
     public Float moyenneIntervenant(Intervenant intervenant) {

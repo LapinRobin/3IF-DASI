@@ -29,6 +29,11 @@ public class AccepterDemandeAction extends Action {
             intervention = service.getDemandeIntervention(intervenant);
             service.accepterIntervention(intervention);
             accepte = true;
+            
+            if (intervention != null) {
+                Long idIntervention = intervention.getId();
+                session.setAttribute("idIntervention", idIntervention);
+            }
         } 
         else{
             System.out.println("Intervenant pas connecté");

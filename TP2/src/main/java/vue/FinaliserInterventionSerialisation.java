@@ -25,8 +25,8 @@ public class FinaliserInterventionSerialisation extends Serialisation {
         
         JsonObject container = new JsonObject();
         
-        boolean deconnexion = (boolean) request.getAttribute("deconnexion");
-        container.addProperty("deconnexion", deconnexion);
+        boolean success = (boolean) request.getAttribute("success");
+        container.addProperty("success", success);
    
 
         Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();

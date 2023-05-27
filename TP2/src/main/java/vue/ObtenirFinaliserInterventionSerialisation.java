@@ -21,9 +21,9 @@ public class ObtenirFinaliserInterventionSerialisation extends Serialisation {
     public void serialiser(HttpServletRequest request, HttpServletResponse response) throws IOException {
         
         JsonObject container = new JsonObject();
-        
-        boolean success = (boolean) request.getAttribute("success");
-        container.addProperty("success", success);
+        boolean deconnexion = false;
+        deconnexion = (boolean) request.getAttribute("deconnexion");
+        container.addProperty("deconnexion", deconnexion);
    
 
         Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
