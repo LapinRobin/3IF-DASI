@@ -16,7 +16,8 @@ and open the template in the editor.
     <body>
         <h1>Instruct'if</h1>
         <h2>Historique des interventions</h2>
-        <a href="index.html" style="position: absolute; top: 0; right: 0;">Déconnexion</a>
+        <button id="btnDeconnecter" style="position: absolute; top: 0; right: 0;">Déconnexion</button>
+
         
         <table id='liste-interventions'>
             <thead>
@@ -194,6 +195,27 @@ and open the template in the editor.
                 });
             }
             
+            function deconnecterIntervenant() {
+                $.ajax({
+                    url: './ActionServlet',
+                    method: 'POST',
+                    data: {
+                        todo: 'deconnecter-intervenant',
+                    },
+                    dataType: 'json'
+                })
+                .done(function(response) {
+                    // Handle the response here
+                    if(response.intervenantDeconnecte) {
+                        window.location.href = "index.html"; // Redirect to the login page or wherever you wish
+                    }
+                })
+                .fail(function(error) {
+                    console.log('Erreur:', error);
+                    alert('Erreur lors de la deconnexion de l\'intervenant HTTP Code ' + error.status);
+                });
+            }
+            
             function accepterDemande() {
                 $.ajax({
                     url:'./ActionServlet',
@@ -222,6 +244,9 @@ and open the template in the editor.
             
             $(document).ready(function(){
                 initDonneesPage();
+                $('#btnDeconnecter').click(function() {
+                    deconnecterIntervenant();
+                });
                 intervalId = setInterval(function() {
                     obtenirDemandeVisio();
                   }, 2000); // 20 secondes en millisecondes

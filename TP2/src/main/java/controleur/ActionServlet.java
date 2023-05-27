@@ -11,6 +11,8 @@ import vue.ObtenirStatsSerialisation;
 import action.AuthentifierIntervenantAction;
 import vue.ProfilUtilisateurSerialisation;
 import action.AuthentifierUtilisateurAction;
+import action.DeconnecterEleveAction;
+import action.DeconnecterIntervenantAction;
 import action.FinaliserInterventionAction;
 import action.InscrireEleveAction;
 import action.ObtenirDemandeAction;
@@ -28,6 +30,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import vue.AccepterDemandeSerialisation;
+import vue.DeconnecterEleveSerialisation;
+import vue.DeconnecterIntervenantSerialisation;
 import vue.FinaliserInterventionSerialisation;
 import vue.HistoriqueEleveSerialisation;
 import vue.HistoriqueIntervenantSerialisation;
@@ -132,6 +136,16 @@ public class ActionServlet extends HttpServlet {
             case "consulter-statistiques" : {
                 new ObtenirStatsAction().executer(request);
                 new ObtenirStatsSerialisation().serialiser(request, response);
+                break;
+            }
+            case "deconnecter-intervenant": {
+                new DeconnecterIntervenantAction().executer(request);
+                new DeconnecterIntervenantSerialisation().serialiser(request, response);
+                break;
+            }
+            case "deconnecter-eleve": {
+                new DeconnecterEleveAction().executer(request);
+                new DeconnecterEleveSerialisation().serialiser(request, response);
                 break;
             }
             default : {

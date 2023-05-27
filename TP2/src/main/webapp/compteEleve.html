@@ -13,6 +13,8 @@ and open the template in the editor.
     </head>
     <body>
         <h1>Instruct'if</h1>
+        <button id="btnDeconnecterEleve" style="position: absolute; top: 0; right: 0;">Déconnexion</button>
+
         <h2>Historique des demandes</h2>
         <table id='liste-demandes'>
             <thead>
@@ -66,10 +68,34 @@ and open the template in the editor.
                 });
             }
             
+            function deconnecterEleve() {
+                $.ajax({
+                    url: './ActionServlet',
+                    method: 'POST',
+                    data: {
+                        todo: 'deconnecter-eleve',
+                    },
+                    dataType: 'json'
+                })
+                .done(function(response) {
+                    // Handle the response here
+                    if(response.eleveDeconnecte) {
+                        window.location.href = "index.html"; // Redirect to the login page or wherever you wish
+                    }
+                })
+                .fail(function(error) {
+                    console.log('Erreur:', error);
+                    alert('Erreur lors de la deconnexion de l\'eleve HTTP Code ' + error.status);
+                });
+            }
+            
             
             
             $(document).ready(function(){
                 initDonneesPage();
+                $('#btnDeconnecterEleve').click(function() {
+                    deconnecterEleve();
+                });
             });
         </script>
             
