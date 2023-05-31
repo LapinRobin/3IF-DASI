@@ -1,8 +1,11 @@
 vue\ObtenirDemandeSerialisation.class
 action\AccepterDemandeAction.class
+action\DeconnecterEleveAction.class
+vue\DeconnecterIntervenantSerialisation.class
 vue\ProfilUtilisateurSerialisation.class
 vue\HistoriqueIntervenantSerialisation.class
 action\AuthentifierUtilisateurAction.class
+action\DeconnecterIntervenantAction.class
 action\ObtenirDemandeAction.class
 vue\HistoriqueEleveSerialisation.class
 vue\InscrireEleveSerialisation.class
@@ -15,6 +18,7 @@ action\ObtenirInterventionsIntervenantAction.class
 vue\ProfilIntervenantSerialisation.class
 vue\Serialisation.class
 vue\AccepterDemandeSerialisation.class
+vue\DeconnecterEleveSerialisation.class
 action\Action.class
 controleur\ActionServlet.class
 action\ObtenirMatieresAction.class

@@ -11,7 +11,7 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <style>
-            .logout-button {
+            #btnDeconnecterEleve {
             position: absolute;
             top: 10px;
             right: 10px;
@@ -29,7 +29,7 @@ and open the template in the editor.
         </style>
     </head>
     <body>
-        <button class="logout-button">Déconnexion</button>
+        <button id="btnDeconnecterEleve">Déconnexion</button>
         <h1>Demande de cours</h1>
         <h2>Nouvelle demande</h2>
 
@@ -111,11 +111,33 @@ and open the template in the editor.
                     });
             }
             
-            
+            function deconnecterEleve() {
+                $.ajax({
+                    url: './ActionServlet',
+                    method: 'POST',
+                    data: {
+                        todo: 'deconnecter-eleve',
+                    },
+                    dataType: 'json'
+                })
+                .done(function(response) {
+                    // Handle the response here
+                    if(response.eleveDeconnecte) {
+                        window.location.href = "index.html"; // Redirect to the login page or wherever you wish
+                    }
+                })
+                .fail(function(error) {
+                    console.log('Erreur:', error);
+                    alert('Erreur lors de la deconnexion de l\'eleve HTTP Code ' + error.status);
+                });
+            }
             
             $(document).ready(function(){
                 initDonneesPage();
                 $('#valider').on( 'click', validerDemande);
+                $('#btnDeconnecterEleve').click(function() {
+                    deconnecterEleve();
+                });
             });
         </script>
     </body>

@@ -5,11 +5,8 @@
  */
 package action;
 
-import java.util.List;
-import java.util.Objects;
 import metier.modele.Intervenant;
 import metier.modele.Intervention;
-import static metier.modele.Intervention_.intervenant;
 import metier.service.ServiceClient;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;

@@ -12,6 +12,8 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href="resources/css/compteIntervenant.css">
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     </head>
     <body>
         <h1>Instruct'if</h1>
@@ -48,6 +50,9 @@ and open the template in the editor.
         <div class="chart-container">
             <canvas id="camembertChart"></canvas>
         </div>
+        
+        <h3>Emplacements des établissements inscrits sur l'application :</h3>
+        <div id="map"></div>
         
         <div class="popup hidden">
             <div class="demande-visio">
@@ -114,6 +119,7 @@ and open the template in the editor.
 
                     let matieres = response.matieres;
                     let total = response.nbTotal;
+                    let etablissements = response.etablissements;
 
                     // Création des tableaux de données pour le graphique
                     let labels = [];
@@ -154,6 +160,26 @@ and open the template in the editor.
                     
                     $('#total-interventions').empty();
                     $('#total-interventions').append("Nombre d'interventions total : "+total);
+                    
+                    // Initialiser la carte
+                    const map = L.map('map').setView([45.7821, 4.8728], 12);
+                    
+                    // Ajouter une couche de tuiles de fond
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '© OpenStreetMap contributors'
+                    }).addTo(map);
+
+                   
+                    etablissements.forEach(etablissement => {
+                        const marker = L.marker([etablissement.latitude, etablissement.longitude]).addTo(map);
+                        const popupContent = `<b>${etablissement.name}</b><br/>
+                          Commune: ${etablissement.nomCommune}<br/>
+                          Academie: ${etablissement.academie}<br/>
+                          IPS: ${etablissement.ips}`;
+
+                        marker.bindPopup(popupContent);
+                        
+                    });
                 })
 
                 .fail(function(error){

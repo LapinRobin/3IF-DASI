@@ -24,35 +24,39 @@ and open the template in the editor.
         <div class="popup hidden">
             <div class="auto-evaluation">
                 <h2>Auto-Évaluation</h2>
-                <ul class="radio-list" id="note-list">
-                    <li>
+                <div class="radio-group" id="note-list">
+                    <div class="radio-option">
+                      <img src="resources/img/angry.png" alt="angry" width="50" height="50">
+                      <label for="comprehension-minimale">
                         <input type="radio" id="comprehension-minimale" name="auto-eval" value="1">
-                        <label for="comprehension-minimale">Je n'ai rien compris
-                            <img src="resources/img/angry.png" alt="angry">
-                        </label>
-                    </li>
-                    <li>
-                        <input type="radio" id="notions-floues" name="auto-eval" value="2">
-                        <label for="notions-floues">
-                            J'ai acquis quelques notions mais cela reste toujours très flou
-                            <img src="resources/img/less-angry.png" alt="less angry">
-                        </label>
-                    </li>
-                    <li>
-                        <input type="radio" id="zones-ombre" name="auto-eval" value="3">
-                        <label for="zones-ombre">
-                            J'ai acquis quelques notions mais il me reste quelques zones d'ombre
-                            <img src="resources/img/less-happy.png" alt="less happy">
-                        </label>
-                    </li>
-                    <li>
+                        <span>Je n'ai rien compris</span>
+                      </label>
+                    </div>
+
+                    <div class="radio-option">
+                      <img src="resources/img/less-angry.png" alt="less angry" width="50" height="50">
+                      <label for="notions-floues">
+                        <input type="radio" id="notions-floues" name="auto-eval" value="2">                            
+                        <span>J'ai acquis quelques notions mais cela reste toujours très flou</span>
+                      </label>
+                    </div>
+
+                    <div class="radio-option">                            
+                      <img src="resources/img/less-happy.png" alt="less happy" width="50" height="50">
+                      <label for="zones-ombre">
+                        <input type="radio" id="zones-ombre" name="auto-eval" value="3">                        
+                        <span>J'ai acquis quelques notions mais il me reste quelques zones d'ombre</span>
+                      </label>
+                    </div>
+
+                    <div class="radio-option">
+                      <img src="resources/img/happy.png" alt="Happy" width="50" height="50">
+                      <label for="tout-compris">                                              
                         <input type="radio" id="tout-compris" name="auto-eval" value="4">
-                        <label for="tout-compris">
-                            J'ai tout compris !
-                            <img src="resources/img/happy.png" alt="Happy">
-                        </label>
-                    </li>
-                </ul>
+                        <span>J'ai tout compris !</span>
+                      </label>
+                    </div>
+                  </div>
                 <button class="valider-auto-eval" id="valider-auto-eval">Valider l'auto-évaluation</button>
             </div>
         </div>

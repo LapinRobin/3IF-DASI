@@ -14,6 +14,7 @@ import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import metier.modele.Etablissement;
 import metier.modele.Matiere;
 
 /**
@@ -26,6 +27,7 @@ public class ObtenirStatsSerialisation extends Serialisation{
         JsonObject container = new JsonObject();
         
         List<Matiere> matieres = (List<Matiere>) request.getAttribute("matieres");
+        List<Etablissement> etablissements = (List<Etablissement>) request.getAttribute("etablissements");
         List<Long> nbsInterventions = (List<Long>) request.getAttribute("nbsInterventions");
         
         JsonArray jsonListeMatieres = new JsonArray();
@@ -51,6 +53,24 @@ public class ObtenirStatsSerialisation extends Serialisation{
 
         container.add("matieres", jsonListeMatieres);
         System.out.println(jsonListeMatieres);
+        
+        JsonArray jsonListeEtablissements = new JsonArray();
+        for(Etablissement e : etablissements)
+        {
+            JsonObject jsonEtablissement = new JsonObject();
+            
+            jsonEtablissement.addProperty("name", e.getNom() );
+            jsonEtablissement.addProperty("latitude", e.getLat() );
+            jsonEtablissement.addProperty("longitude", e.getLng() );
+            jsonEtablissement.addProperty("ips", e.getIps() );
+            jsonEtablissement.addProperty("nomCommune", e.getNomCommune() );
+            jsonEtablissement.addProperty("academie", e.getAcademie() );
+
+            jsonListeEtablissements.add(jsonEtablissement);
+        }
+       
+
+        container.add("etablissements", jsonListeEtablissements);
         
         Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
         PrintWriter out = getWriter(response);

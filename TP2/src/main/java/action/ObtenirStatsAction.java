@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import metier.service.ServiceClient;
 import javax.servlet.http.HttpServletRequest;
+import metier.modele.Etablissement;
 import metier.modele.Matiere;
 
 
@@ -28,7 +29,9 @@ public class ObtenirStatsAction extends Action{
         for(Matiere matiere : matieres)
             nbsInterventions.add(service.nbInterventionsParMatieres(matiere));
          
-
+        List<Etablissement> etablissements = service.listerEtablissements();
+        
+        request.setAttribute("etablissements", etablissements);
         request.setAttribute("matieres", matieres);     
         request.setAttribute("nbsInterventions", nbsInterventions); 
     }
