@@ -10,6 +10,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="resources/css/demandeSoutien.css">
         <style>
             #btnDeconnecterEleve {
             position: absolute;
@@ -17,15 +18,35 @@ and open the template in the editor.
             right: 10px;
             }
             
-            .subjects-list {
-                list-style-type: none;
-                padding: 0;
-                display: flex;
+            img {
+                width : 30px;
+                height : 30px;
             }
+            .subjects-list li {
+                position: relative;
+                margin-right: 15px;
+              }
 
-              .subjects-list li {
-                margin-right: 10px;
-            }
+              .subjects-list li input[type="radio"] {
+                position: absolute;
+                top: 30px;
+                left: 0;
+                opacity: 1;
+              }
+              
+              .subjects-list li label {
+                position: relative;
+                top: 30px;
+                left: 5px;
+              }
+
+              .subjects-list li img {
+                position: absolute;
+                top: 0;
+                left: 15px;
+                pointer-events: none; /* Allows clicks to pass through to the radio button */
+              }
+
         </style>
     </head>
     <body>
@@ -51,7 +72,7 @@ and open the template in the editor.
         
         <script>
             function initDonneesPage(){
-                
+
                 $.ajax({
                     url:'./ActionServlet',
                     method: 'POST',
@@ -65,7 +86,7 @@ and open the template in the editor.
                     $('#liste-matieres').empty();
                     $.each(matieres, function(index, matiere){
                         $('#liste-matieres').append(
-                            '<li><input type="radio" id="'+matiere.name+'" name="matiere" value="'+matiere.name+'"><label for="'+matiere.name+'">'+matiere.name+'</label></li>'
+                            '<li><img src="resources/img/' + matiere.name + '.png"><input type="radio" id="'+matiere.name+'" name="matiere" value="'+matiere.name+'"><label for="'+matiere.name+'">'+matiere.name+'</label></li>'
                         );
                     });
                 })
@@ -75,9 +96,9 @@ and open the template in the editor.
                     alert('Erreur lors du chargement des données: HTTP Code '+error.status);
                 });
             }
-            
+
             function validerDemande(){
-              
+
 
                     // Récupération de la valeur des champs du formulaire
                     var matiere = $('#liste-matieres input[type="radio"]:checked').val();
@@ -95,7 +116,7 @@ and open the template in the editor.
                         dataType: 'json'
                     })
                     .done( function (response) { // Fonction appelée en cas d'appel AJAX réussi
-                        
+
                         if (response.success) {
                             window.location = "visioconferenceEleve.html";
                         }
@@ -107,10 +128,10 @@ and open the template in the editor.
                         console.log('Error',error); // LOG dans Console Javascript
                         alert("Erreur lors de l'appel AJAX");
                     })
-                    .always( function () { // Fonction toujours appelée    
+                    .always( function () { // Fonction toujours appelée
                     });
             }
-            
+
             function deconnecterEleve() {
                 $.ajax({
                     url: './ActionServlet',
@@ -131,7 +152,7 @@ and open the template in the editor.
                     alert('Erreur lors de la deconnexion de l\'eleve HTTP Code ' + error.status);
                 });
             }
-            
+
             $(document).ready(function(){
                 initDonneesPage();
                 $('#valider').on( 'click', validerDemande);

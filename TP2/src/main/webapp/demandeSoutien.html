@@ -17,6 +17,36 @@ and open the template in the editor.
             top: 10px;
             right: 10px;
             }
+            
+            img {
+                width : 30px;
+                height : 30px;
+            }
+            .subjects-list li {
+                position: relative;
+                margin-right: 15px;
+              }
+
+              .subjects-list li input[type="radio"] {
+                position: absolute;
+                top: 30px;
+                left: 0;
+                opacity: 1;
+              }
+              
+              .subjects-list li label {
+                position: relative;
+                top: 30px;
+                left: 5px;
+              }
+
+              .subjects-list li img {
+                position: absolute;
+                top: 0;
+                left: 15px;
+                pointer-events: none; /* Allows clicks to pass through to the radio button */
+              }
+
         </style>
     </head>
     <body>

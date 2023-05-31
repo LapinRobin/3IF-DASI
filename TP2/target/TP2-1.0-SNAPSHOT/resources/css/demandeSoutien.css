@@ -1,0 +1,31 @@
+#btnDeconnecterEleve {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.subjects-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: start;
+}
+
+.subjects-list li {
+    margin-right: 10px;
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 25px; /* Adjust as needed depending on the size of your icons */
+}
+
+#svt { background-image: url('https://example.com/path-to-your-icon/leaf-icon.svg'); }
+#maths { background-image: url('https://example.com/path-to-your-icon/maths-icon.svg'); }
+#history-geo { background-image: url('https://example.com/path-to-your-icon/history-icon.svg'); }
+#francis { background-image: url('https://example.com/path-to-your-icon/france-icon.svg'); }
+#anglais { background-image: url('https://example.com/path-to-your-icon/uk-icon.svg'); }
+#espagnola { background-image: url('https://example.com/path-to-your-icon/spanish-icon.svg'); }
+#physique-chimie { background-image: url('https://example.com/path-to-your-icon/physics-icon.svg'); }
+#technologie { background-image: url('https://example.com/path-to-your-icon/technology-icon.svg'); }
+#musique { background-image: url('https://example.com/path-to-your-icon/music-icon.svg'); }
