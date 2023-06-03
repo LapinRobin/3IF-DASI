@@ -7,32 +7,95 @@ and open the template in the editor.
     Created on : 25 mai 2023, 23:02:18
     Author     : acremona
 */
+h1 {
+  display: flex;
+  align-items: center; /* Centre verticalement */
+  justify-content: center; /* Centre horizontalement */
+  text-align: center;
+  font-family: "Impact", sans-serif;
+  font-weight: bold;
+  font-size: 48px;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-shadow: 0 0 10px #0000FF;
+  font-style: italic;
+}
+
+h2 {
+  color: #0000ff;
+}
+
+#btnDeconnecter {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: linear-gradient(to right, #00ffff, #0000ff);
+  color: #ffffff;
+  border-radius: 20px;
+  border: none;
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 150px;
+}
+
+#btnDeconnecter:hover {
+  background: linear-gradient(to right, #0000ff, #00ffff);
+}
+
+#liste-interventions {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#liste-interventions th, #liste-interventions td {
+  border: 1px solid #0000ff;
+  padding: 10px;
+  text-align: center;
+}
+
 .chart-container {
   max-width: 600px;
+  margin: auto;
 }
 
 #map {
-    height: 400px;
+  height: 400px;
+  margin-top: 20px;
 }
 
 .popup {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
 .popup .demande-visio {
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.lancer-appel {
+  background: linear-gradient(to right, #00ffff, #0000ff);
+  color: #ffffff;
+  border-radius: 20px;
+  border: none;
+  padding: 10px;
+  margin-top: 20px;
+  width: 200px;
+}
+
+.lancer-appel:hover {
+  background: linear-gradient(to right, #0000ff, #00ffff);
 }
