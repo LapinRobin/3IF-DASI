@@ -4,9 +4,10 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 */
 /* 
-    Created on : 25 mai 2023, 23:02:18
-    Author     : acremona
+    Created on : Jun 3, 2023, 8:14:10 PM
+    Author     : ysu
 */
+
 h1 {
   display: flex;
   align-items: center; /* Centre verticalement */
@@ -24,7 +25,6 @@ h1 {
 h2 {
   color: #0000ff;
 }
-
 body {
   background-color: beige;
   background-image: radial-gradient(circle, #d3a4f7 60%, transparent 0%);
@@ -33,7 +33,7 @@ body {
   text-align: center;
 }
 
-#btnDeconnecter {
+#btnDeconnecterEleve {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -46,55 +46,22 @@ body {
   width: 150px;
 }
 
-#btnDeconnecter:hover {
+#btnDeconnecterEleve:hover {
   background: linear-gradient(to right, #0000ff, #00ffff);
 }
 
-#liste-interventions {
+#liste-demandes {
   width: 100%;
   border-collapse: collapse;
 }
 
-#liste-interventions th, #liste-interventions td {
+#liste-demandes th, #liste-demandes td {
   border: 1px solid #0000ff;
   padding: 10px;
   text-align: center;
 }
 
-.chart-container {
-  max-width: 600px;
-  margin: auto;
-}
-
-#map {
-  height: 400px;
-  margin-top: 20px;
-}
-
-.popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.hidden {
-  display: none;
-}
-
-.popup .demande-visio {
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  text-align: center;
-}
-
-.lancer-appel {
+#bouton-demande {
   background: linear-gradient(to right, #00ffff, #0000ff);
   color: #ffffff;
   border-radius: 20px;
@@ -104,6 +71,6 @@ body {
   width: 200px;
 }
 
-.lancer-appel:hover {
+#bouton-demande:hover {
   background: linear-gradient(to right, #0000ff, #00ffff);
 }

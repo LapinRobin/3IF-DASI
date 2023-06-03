@@ -5,9 +5,9 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
 @Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2023-06-03T18:48:49")
-@StaticMetamodel(IntervenantAutre.class)
-public class IntervenantAutre_ extends Intervenant_ {
+@StaticMetamodel(IntervenantEnseignant.class)
+public class IntervenantEnseignant_ extends Intervenant_ {
 
-    public static volatile SingularAttribute<IntervenantAutre, String> activite;
+    public static volatile SingularAttribute<IntervenantEnseignant, String> typeEtablissement;
 
 }

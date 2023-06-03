@@ -70,7 +70,7 @@ button:hover {
 body {
   background-color: beige;
   background-image: radial-gradient(circle, #d3a4f7 60%, transparent 0%);
-  background-size: 150px 150px;
+  background-size: 3240px 3240px;
   position: relative;
   text-align: center;
 }

@@ -25,6 +25,14 @@ h2 {
   color: #0000ff;
 }
 
+body {
+  background-color: beige;
+  background-image: radial-gradient(circle, #d3a4f7 60%, transparent 0%);
+  background-size: 3240px 3240px;
+  position: relative;
+  text-align: center;
+}
+
 #btnDeconnecter {
   position: absolute;
   top: 10px;
