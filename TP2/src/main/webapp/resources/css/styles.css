@@ -17,9 +17,17 @@ body {
 }
 
 h1 {
-    color: #333;
-    text-align: center;
-    padding: 20px 0;
+  display: flex;
+  align-items: center; /* Centre verticalement */
+  justify-content: center; /* Centre horizontalement */
+  text-align: center;
+  font-family: "Impact", sans-serif;
+  font-weight: bold;
+  font-size: 48px;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-shadow: 0 0 10px #0000FF;
+  font-style: italic;
 }
 
 .top-right {
@@ -28,20 +36,21 @@ h1 {
     right: 16px;
 }
 
+/* Styles pour le bouton de connexion */
 button {
-    padding: 10px 20px;
-    margin-left: 10px;
-    background-color: #4CAF50; /* green */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition-duration: 0.4s;
+  background: linear-gradient(to right, #00ffff, #0000ff);
+  color: #ffffff;
+  border-radius: 20px;
+  border: none;
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 200px;
 }
 
 button:hover {
-    background-color: #45a049; /* dark green */
+  background: linear-gradient(to right, #0000ff, #00ffff);
 }
+
 .image-container {
   display: flex; /* Use flexbox for horizontal alignment */
 }
