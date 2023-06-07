@@ -8,12 +8,16 @@ and open the template in the editor.
     Author     : ysu
 */
 
-/* Normalize body margins and padding */
 body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+  background-color: beige;
+  background-image: radial-gradient(circle, #d3a4f7 60%, transparent 0%);
+  background-size: 3240px 3240px;
+  position: relative;
+  text-align: center;
+}
+
+p{
+  color: #0000ff;
 }
 
 h1 {
@@ -28,6 +32,20 @@ h1 {
   color: #ffffff;
   text-shadow: 0 0 10px #0000FF;
   font-style: italic;
+}
+
+/* Styles pour la barre horizontale en haut de la page */
+.barre-haut {
+  display: flex;
+  align-items: center; /* Centre verticalement */
+  justify-content: center; /* Centre horizontalement */
+  position: fixed;
+  top: 0;
+  left: 0;   
+  height: 75px;
+  width: 100%;
+  background-color: #d3a4f7;
+  border-bottom: 2px solid #0000ff;
 }
 
 .top-right {
@@ -53,10 +71,12 @@ button:hover {
 
 .image-container {
   display: flex; /* Use flexbox for horizontal alignment */
+  justify-content: center; /* Centre horizontalement les éléments */
+  align-items: center; /* Centre verticalement les éléments */
 }
 
 .image-container img {
-  width: 33.33%; /* Set each image to occupy one-third of the container width */
+  width: 20%; /* Set each image to occupy one-third of the container width */
   height: auto; /* Maintain the aspect ratio of the images */
 }
 .content {
